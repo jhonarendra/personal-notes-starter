@@ -40,19 +40,21 @@ class IndexPage extends React.Component {
     })
   }
   moveNote = (id, val) => {
-    const notes = [...this.state.notes]
+    const notes = [...this.state.allNotes]
     notes[notes.findIndex(note => note.id === id)].archived = val
     this.setState({
       ...this.state,
-      notes
+      notes,
+      allNotes: notes
     })
   }
   deleteNote = (id) => {
-    const notes = [...this.state.notes]
+    const notes = [...this.state.allNotes]
     notes.splice(notes.findIndex(note => note.id === id), 1)
     this.setState({
       ...this.state,
-      notes
+      notes,
+      allNotes: notes
     })
   }
   handleSearch = (search) => {
