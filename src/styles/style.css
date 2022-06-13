@@ -24,13 +24,16 @@ input::placeholder, textarea::placeholder {
   color: #aaa;
   font-weight: bold;
 }
-
+.note-app__header-wrapper {
+  border-bottom: 1px solid #aaa;
+}
 .note-app__header {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 4px 16px;
-  border-bottom: 1px solid #aaa;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .note-app__header h1 {
