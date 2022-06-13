@@ -9,15 +9,14 @@ class IndexPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      allNotes: [],
       notes: []
     }
   }
-  componentDidMount() {
-    const notes = getInitialData()
-
-    this.setState({
-      notes
-    })
+  getNote = (archived = false) => {
+    let notes = [...this.state.notes]
+    notes = notes.filter(note => note.archived === archived)
+    return notes
   }
   tambahNote = (form) => {
     const notes = [...this.state.notes]
@@ -30,6 +29,7 @@ class IndexPage extends React.Component {
     }
     notes.push(newNotes)
     this.setState({
+      ...this.state,
       notes
     })
   }
@@ -37,6 +37,7 @@ class IndexPage extends React.Component {
     const notes = [...this.state.notes]
     notes[notes.findIndex(note => note.id === id)].archived = val
     this.setState({
+      ...this.state,
       notes
     })
   }
@@ -44,13 +45,38 @@ class IndexPage extends React.Component {
     const notes = [...this.state.notes]
     notes.splice(notes.findIndex(note => note.id === id), 1)
     this.setState({
+      ...this.state,
       notes
     })
   }
+  handleSearch = (search) => {
+    let notes = [...this.state.allNotes]
+    if (search !== '') {
+      notes = notes.filter(note => note.title.toLowerCase().includes(search.toLowerCase()))
+    }
+    this.setState({
+      ...this.state,
+      notes
+    })
+  }
+  
+  componentDidMount() {
+    const allNotes = getInitialData()
+    const notes = getInitialData()
+
+    this.setState({
+      ...this.state,
+      allNotes,
+      notes
+    })
+  }
+
   render() {
     return (
       <>
-        <HeaderSection />
+        <HeaderSection
+          handleSearch={this.handleSearch}
+        />
         <BodySection>
           <>
             <NoteForm
@@ -58,14 +84,14 @@ class IndexPage extends React.Component {
             />
             <h2>Catatan Aktif</h2>
             <NoteList
-              notes={this.state.notes.filter(note => !note.archived)}
+              notes={this.getNote()}
               listType="aktif"
               moveNote={this.moveNote}
               deleteNote={this.deleteNote}
             />
             <h2>Arsip</h2>
             <NoteList
-              notes={this.state.notes.filter(note => note.archived)}
+              notes={this.getNote(true)}
               listType="arsip"
               moveNote={this.moveNote}
               deleteNote={this.deleteNote}
