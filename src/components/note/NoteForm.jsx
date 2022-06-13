@@ -37,33 +37,45 @@ class NoteForm extends React.Component {
   }
   render() {
     return (
-      <div className='note-input'>
-        <h2>Buat catatan</h2>
-        <form onSubmit={this.handleSubmit}>
-          <p className="note-input__title__char-limit">
-            Sisa karakter: { this.state.titleLimit }
-          </p>
-          <input
-            className="note-input__title"
-            type="text"
-            placeholder="Ini adalah judul ..."
-            required=""
-            value={this.state.form.title}
-            name="title"
-            onChange={this.handleChange}
-          />
-          <textarea
-            className="note-input__body"
-            type="text"
-            name="body"
-            placeholder="Tuliskan catatanmu di sini ..."
-            required=""
-            value={this.state.form.body}
-            onChange={this.handleChange}
-          >
-          </textarea>
-          <button type="submit">Buat</button>
-        </form>
+      <div className='note-input-wrapper'>
+        <div className='note-input'>
+          <h2>Buat catatan</h2>
+          <form onSubmit={this.handleSubmit}>
+            <p className="note-input__title__char-limit">
+              Sisa karakter: { this.state.titleLimit }
+            </p>
+            <input
+              className="note-input__title"
+              type="text"
+              placeholder="Ini adalah judul ..."
+              required=""
+              value={this.state.form.title}
+              name="title"
+              onChange={this.handleChange}
+            />
+            <textarea
+              className="note-input__body"
+              type="text"
+              name="body"
+              placeholder="Tuliskan catatanmu di sini ..."
+              required=""
+              value={this.state.form.body}
+              onChange={this.handleChange}
+            >
+            </textarea>
+            <button
+              type="submit"
+            >
+              Buat
+            </button>
+            <button
+              type="button"
+              onClick={this.props.closeForm}
+            >
+              Batal
+            </button>
+          </form>
+        </div>
       </div>
     )
   }

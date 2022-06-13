@@ -10,7 +10,8 @@ class IndexPage extends React.Component {
     super(props)
     this.state = {
       allNotes: [],
-      notes: []
+      notes: [],
+      aksi: ''
     }
   }
   getNote = (archived = false) => {
@@ -30,7 +31,8 @@ class IndexPage extends React.Component {
     notes.push(newNotes)
     this.setState({
       ...this.state,
-      notes
+      notes,
+      aksi: ''
     })
   }
   moveNote = (id, val) => {
@@ -59,6 +61,12 @@ class IndexPage extends React.Component {
       notes
     })
   }
+  handleShowFormTambah = () => {
+    this.setState({
+      ...this.state,
+      aksi: (this.state.aksi === 'tambah') ? '' : 'tambah'
+    })
+  }
   
   componentDidMount() {
     const allNotes = getInitialData()
@@ -79,10 +87,13 @@ class IndexPage extends React.Component {
         />
         <BodySection>
           <>
-            <NoteForm
-              tambahNote={this.tambahNote}
-            />
             <h2>Catatan Aktif</h2>
+            <button
+              className='button-tambah'
+              onClick={this.handleShowFormTambah}
+            >
+              Tambah Catatan
+            </button>
             <NoteList
               notes={this.getNote()}
               listType="aktif"
@@ -98,6 +109,15 @@ class IndexPage extends React.Component {
             />
           </>
         </BodySection>
+        {
+          (this.state.aksi === 'tambah') ? (
+            <NoteForm
+              tambahNote={this.tambahNote}
+              closeForm={this.handleShowFormTambah}
+            />
+          ) : ''
+        }
+        
       </>
     )
   }

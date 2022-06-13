@@ -54,6 +54,16 @@ input::placeholder, textarea::placeholder {
   margin: 16px 0;
 }
 
+.note-input-wrapper {
+  width: 100%;
+  top: 0;
+  height: 100vh;
+  padding: 10px;
+  padding-top: 40px;
+  position: fixed;
+  background-color: #202124;
+}
+
 .note-input {
   margin: 0 auto;
   max-width: 500px;
@@ -79,7 +89,7 @@ input::placeholder, textarea::placeholder {
   min-height: 175px;
 }
 
-.note-input button {
+.note-input button, .button-tambah {
   display: block;
   width: 100%;
   padding: 8px;
@@ -90,6 +100,7 @@ input::placeholder, textarea::placeholder {
   border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
+  margin-bottom: 16px
 }
 
 .notes-list {
