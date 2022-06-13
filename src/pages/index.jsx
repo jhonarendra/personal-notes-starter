@@ -19,6 +19,20 @@ class IndexPage extends React.Component {
       notes
     })
   }
+  tambahNote = (form) => {
+    const notes = [...this.state.notes]
+    const newNotes = {
+      id: +new Date(),
+      title: form.title,
+      body: form.body,
+      createdAt: new Date(),
+      archived: false
+    }
+    notes.push(newNotes)
+    this.setState({
+      notes
+    })
+  }
   moveNote = (id, val) => {
     const notes = [...this.state.notes]
     notes[notes.findIndex(note => note.id === id)].archived = val
@@ -39,7 +53,9 @@ class IndexPage extends React.Component {
         <HeaderSection />
         <BodySection>
           <>
-            <NoteForm />
+            <NoteForm
+              tambahNote={this.tambahNote}
+            />
             <h2>Catatan Aktif</h2>
             <NoteList
               notes={this.state.notes.filter(note => !note.archived)}

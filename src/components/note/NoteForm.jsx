@@ -23,11 +23,16 @@ class NoteForm extends React.Component {
       titleLimit: 50 - form.title.length
     })
   }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.tambahNote(this.state.form)
+  }
   render() {
     return (
       <div className='note-input'>
         <h2>Buat catatan</h2>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <p className="note-input__title__char-limit">
             Sisa karakter: { this.state.titleLimit }
           </p>
