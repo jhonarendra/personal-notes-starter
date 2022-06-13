@@ -20,7 +20,7 @@ class IndexPage extends React.Component {
     return notes
   }
   tambahNote = (form) => {
-    const notes = [...this.state.notes]
+    const notes = [...this.state.allNotes]
     const newNotes = {
       id: +new Date(),
       title: form.title,
@@ -34,6 +34,7 @@ class IndexPage extends React.Component {
     });
     this.setState({
       ...this.state,
+      allNotes: notes,
       notes,
       aksi: ''
     })
