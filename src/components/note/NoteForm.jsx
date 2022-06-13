@@ -26,6 +26,13 @@ class NoteForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    this.setState({
+      form: {
+        title: '',
+        body: ''
+      },
+      titleLimit: 50
+    })
     this.props.tambahNote(this.state.form)
   }
   render() {

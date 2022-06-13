@@ -1,4 +1,5 @@
 import React from 'react'
+import { showFormattedDate } from '../../utils'
 
 function NoteItem({ note, listType, moveNote, deleteNote }) {
   return (
@@ -8,7 +9,7 @@ function NoteItem({ note, listType, moveNote, deleteNote }) {
           { note.title }
         </h3>
         <p className="note-item__date">
-          { note.created_at }
+          { showFormattedDate(note.createdAt) }
         </p>
         <p className="note-item__body">
           { note.body }
