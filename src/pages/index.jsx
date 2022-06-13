@@ -29,6 +29,9 @@ class IndexPage extends React.Component {
       archived: false
     }
     notes.push(newNotes)
+    notes.sort(function(a, b){
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
     this.setState({
       ...this.state,
       notes,
